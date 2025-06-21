@@ -1,16 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
-import { ErrorRequestHandler } from "express";
+import { NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";
-import config from "../config";
-import AppError from "../errors/AppError";
-import handleCastError from "../errors/handleCastError";
-import handleDuplicateError from "../errors/handleDuplicateError";
-import handleValidationError from "../errors/handleValidationError";
-import handleZodError from "../errors/handleZodError";
 import { TErrorSources } from "../interface/error";
+import handleZodError from "../error/handleZodError";
+import handleValidationError from "../error/handleValidationError";
+import handleCastError from "../error/handleCastError";
+import handleDuplicateError from "../error/handleDuplicateError";
+import AppError from "../error/AppError";
 
-const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
+const globalErrorHandler = (
+  err: any,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   console.log(err.statusCode);
   //setting default values
   let statusCode = 500;
@@ -63,11 +67,11 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
 
   //ultimate return
   return res.status(statusCode).json({
-    success: false,
     message,
+    success: false,
     errorSources,
     err,
-    stack: config.NODE_ENV === "development" ? err?.stack : null,
+    stack: err?.stack,
   });
 };
 
@@ -75,8 +79,8 @@ export default globalErrorHandler;
 
 //pattern
 /*
-success
 message
+success
 errorSources:[
   path:'',
   message:''
