@@ -42,14 +42,21 @@ const getAllBooksFromDB = async (query: any) => {
 //get single book by id from database
 const getSingleBookByIdFromDB = async (id: string) => {
   const result = await Book.findById(id);
-  console.log(result);
 
   return result;
 };
 //--------------------------------
 
+//update book by id from database
+const updateBookByIdFromDB = async (id: string, bookData: Partial<TBook>) => {
+  const result = await Book.findByIdAndUpdate(id, bookData);
+
+  return result;
+};
+
 export const BookServices = {
   createBookIntoDB,
   getAllBooksFromDB,
   getSingleBookByIdFromDB,
+  updateBookByIdFromDB,
 };
