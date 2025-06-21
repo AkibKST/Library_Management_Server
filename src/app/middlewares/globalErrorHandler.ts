@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
-import { NextFunction, Request, Response } from "express";
+import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";
 import { TErrorSources } from "../interface/error";
 import handleZodError from "../error/handleZodError";
@@ -9,12 +9,7 @@ import handleCastError from "../error/handleCastError";
 import handleDuplicateError from "../error/handleDuplicateError";
 import AppError from "../error/AppError";
 
-const globalErrorHandler = (
-  err: any,
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   console.log(err.statusCode);
   //setting default values
   let statusCode = 500;
