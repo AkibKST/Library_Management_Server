@@ -25,4 +25,8 @@ router.get("/:bookId", BookControllers.getSingleBookById);
 router.put("/:bookId", BookControllers.updateBookById);
 //--------------------------------
 
+//delete book route
+router.delete("/:bookId", BookControllers.deleteBookById);
+//--------------------------------
+
 export const BookRoutes = router;

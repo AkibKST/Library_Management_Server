@@ -53,10 +53,20 @@ const updateBookByIdFromDB = async (id: string, bookData: Partial<TBook>) => {
 
   return result;
 };
+//--------------------------------
+
+// delete book by id from database
+const deleteBookByIdFromDB = async (id: string) => {
+  const result = await Book.findByIdAndDelete(id);
+
+  return result;
+};
+//--------------------------------
 
 export const BookServices = {
   createBookIntoDB,
   getAllBooksFromDB,
   getSingleBookByIdFromDB,
   updateBookByIdFromDB,
+  deleteBookByIdFromDB,
 };
