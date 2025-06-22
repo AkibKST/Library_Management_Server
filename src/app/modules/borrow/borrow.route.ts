@@ -14,7 +14,7 @@ router.post(
 //--------------------------------
 
 //get all borrow route with aggregation
-// router.get("/", BorrowControllers.getAllBorrows);
+router.get("/", BorrowControllers.getAllBorrows);
 //--------------------------------
 
 export const BorrowRoutes = router;

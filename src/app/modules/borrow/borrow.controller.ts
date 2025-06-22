@@ -15,16 +15,19 @@ const createBorrow = catchAsync(async (req, res) => {
 });
 //--------------------------------
 
-//create get all books controller
-// const getAllBorrows = catchAsync(async (req, res) => {
-//   sendResponse(res, {
-//     success: true,
-//     message: "Borrowed books summary retrieved successfully",
-//     data: result,
-//   });
-// });
-//--------------------------------
+// create get all books controller
+const getAllBorrows = catchAsync(async (req, res) => {
+  const result = await BorrowServices.getAllBorrowsFromDB();
+
+  sendResponse(res, {
+    success: true,
+    message: "Borrowed books summary retrieved successfully",
+    data: result,
+  });
+});
+// --------------------------------
 
 export const BorrowControllers = {
   createBorrow,
+  getAllBorrows,
 };
