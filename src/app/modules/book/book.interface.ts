@@ -14,4 +14,5 @@ export type TBook = {
   description?: string;
   copies: number;
   available?: boolean;
+  updateAvailability(): Promise<void>;
 };

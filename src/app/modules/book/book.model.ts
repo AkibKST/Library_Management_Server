@@ -2,7 +2,7 @@ import { model, Schema } from "mongoose";
 import { TBook } from "./book.interface";
 
 // Create the Mongoose schema
-const BookSchema: Schema<TBook> = new Schema(
+const BookSchema = new Schema<TBook>(
   {
     title: {
       type: String,
@@ -51,6 +51,14 @@ const BookSchema: Schema<TBook> = new Schema(
     timestamps: true,
   }
 );
+
+// Instance methods for the Book model
+BookSchema.methods.updateAvailability = async function () {
+  if (this.copies <= 0) {
+    this.available = false;
+    await this.save();
+  }
+};
 
 // Create and export the model
 export const Book = model<TBook>("Book", BookSchema);
